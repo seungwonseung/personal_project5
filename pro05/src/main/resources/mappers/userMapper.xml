@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tshop.mapper.UserMapper">
+    <insert id="save">
+        insert into user values (DEFAULT, #{userId}, #{username}, #{password}, #{active}, #{email}, #{address}, #{tel}, DEFAULT)
+    </insert>
+    <select id="findAll" resultType="com.tshop.entity.User">
+        select * from user
+    </select>
+    <select id="findById" resultType="com.tshop.entity.User">
+        select * from user where id = #{id}
+    </select>
+    <select id="findByUserId" resultType="com.tshop.entity.User">
+        select * from user where userId = #{userId}
+    </select>
+    <select id="findByEmail" resultType="com.tshop.entity.User">
+        select * from user where email = #{email}
+    </select>
+    <select id="getLatestUser" resultType="com.tshop.entity.User">
+        select * from user order by id desc limit 0,1
+    </select>
+    <update id="update">
+        update user set username=#{username}, password=#{password}, address=#{address}, tel=#{tel} where id=#{id}
+    </update>
+    <insert id="setUserRole">
+        insert into userRole values (#{id}, #{roleId})
+    </insert>
+    <select id="getUserRole">
+        select * from userRole where id = #{id}
+    </select>
+    <select id="getRole">
+        select * from role where roleId=#{roleId}
+    </select>
+</mapper>

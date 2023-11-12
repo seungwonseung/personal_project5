@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+  <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+  <link rel="stylesheet" th:href="@{/css/fontawesome.css}">
+  <link rel="stylesheet" th:href="@{/css/templatemo-villa-agency.css}">
+  <link rel="stylesheet" th:href="@{/css/owl.css}">
+  <link rel="stylesheet" th:href="@{/css/animate.css}">
+  <link rel="stylesheet" th:href="@{https://unpkg.com/swiper@7/swiper-bundle.min.css}"/>
+  <link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <style>
+    .field-error {
+      border-color: #dc3545;
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <form th:action="@{/member/auth}" th:object="${loginForm}" method="post">
+    <div th:if="${#fields.hasGlobalErrors()}">
+      <p class="field-error" th:each="err : ${#fields.globalErrors()}"
+         th:text="${err}">전체 오류 메시지</p>
+    </div>
+    <div>
+      <label for="userId">로그인 ID</label>
+      <input type="text" id="userId" th:field="*{userId}" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{userId}" />
+    </div>
+    <div>
+      <label for="password">비밀번호</label>
+      <input type="password" id="password" th:field="*{password}" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{password}" />
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col">
+        <button class="button" type="submit">
+          로그인</button>
+      </div>
+      <div class="col">
+        <button class="button"
+                th:onclick="|location.href='@{/}'|"
+                type="button">취소</button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
